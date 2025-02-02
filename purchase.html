@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purchase - Milky Way Exploration</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-900">
+
+    <nav class="bg-purple-600 p-4 text-white">
+        <div class="flex justify-between items-center">
+            <a href="#" class="text-2xl font-extrabold">Milky Way Exploration</a>
+            <div>
+                <a href="landing_page.html" class="mr-4 hover:text-gray-300">Home</a>
+                <a href="inventory.html" class="hover:text-gray-300">Inventory</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto mt-8 p-6 grid grid-cols-1 md:grid-cols-2 gap-8">
+
+        <div>
+            <h2 class="text-3xl font-extrabold text-center mb-6">Complete Your Purchase</h2>
+
+            <div class="bg-white p-6 rounded-lg shadow-md mb-8">
+                <h3 class="text-xl font-semibold mb-4">Product Purchased</h3>
+                <div id="productDetails" class="flex justify-between mb-4">
+                    <span id="productName" class="text-lg">Earth Yogurt</span>
+                    <span id="productPrice" class="text-lg font-semibold">$29.99</span>
+                </div>
+                <div id="shippingPrice" class="flex justify-between mb-4">
+                    <span class="text-lg">Shipping Fee</span>
+                    <span class="text-lg font-semibold">$5.00</span>
+                </div>
+                <div class="flex justify-between font-semibold text-lg">
+                    <span>Total</span>
+                    <span id="totalPrice" class="text-xl">$34.99</span>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h3 class="text-xl font-semibold mb-4">Shipping Information</h3>
+                <form id="purchaseForm">
+                    <div class="grid grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <label for="firstName" class="block text-lg font-medium mb-2">First Name</label>
+                            <input type="text" id="firstName" name="firstName" class="w-full p-3 border border-gray-300 rounded-md" required>
+                        </div>
+                        <div>
+                            <label for="lastName" class="block text-lg font-medium mb-2">Last Name</label>
+                            <input type="text" id="lastName" name="lastName" class="w-full p-3 border border-gray-300 rounded-md" required>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <label for="address" class="block text-lg font-medium mb-2">Address</label>
+                        <input type="text" id="address" name="address" class="w-full p-3 border border-gray-300 rounded-md" required>
+                    </div>
+
+                    <button type="submit" class="bg-blue-500 text-white py-3 px-6 rounded-lg hover:bg-blue-600 transition duration-300 w-full">
+                        Pay Now
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="flex justify-center items-center">
+            <img id="productImage" src="" alt="Product Image" class="max-w-full h-auto rounded-lg shadow-md">
+        </div>
+
+    </div>
+
+    <script>
+        window.onload = function() {
+            const selectedProduct = localStorage.getItem('product');
+            const productImage = localStorage.getItem('productImage');
+
+            if (selectedProduct && productImage) {
+                document.getElementById("productName").innerText = selectedProduct;
+                document.getElementById("productPrice").innerText = `$29.99`;
+
+                const shippingFee = 5.00;
+                document.getElementById("shippingPrice").querySelector("span:nth-child(2)").innerText = `$${shippingFee.toFixed(2)}`;
+
+                const totalPrice = (29.99 + shippingFee).toFixed(2);
+                document.getElementById("totalPrice").innerText = `$${totalPrice}`;
+
+                document.getElementById("productImage").src = productImage;
+            }
+        };
+
+        document.getElementById("purchaseForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const firstName = document.getElementById("firstName").value;
+            const lastName = document.getElementById("lastName").value;
+            const address = document.getElementById("address").value;
+
+            let orderId = localStorage.getItem('orderId');
+            orderId = orderId ? parseInt(orderId) + 1 : 1; 
+
+            const order = {
+                orderId: orderId,
+                firstName: firstName,
+                lastName: lastName,
+                address: address
+            };
+
+            let orders = JSON.parse(localStorage.getItem('orders')) || [];
+
+            orders.push(order);
+
+            localStorage.setItem('orders', JSON.stringify(orders));
+
+            alert(`Thank you for your purchase, ${firstName} ${lastName}!\nYour order will be shipped to: ${address}`);
+        });
+    </script>
+</body>
+</html>

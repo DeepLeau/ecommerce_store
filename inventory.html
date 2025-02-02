@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Milky Whey</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 text-gray-900">
+    <nav class="bg-purple-600 p-4 text-white">
+        <div class="flex justify-between items-center">
+            <a class="text-2xl font-extrabold">Milky Whey</a>
+            <div>
+                <a href="landing_page.html" class="mr-4 hover:text-gray-300">Home</a>
+                <a href="delivery.html" class="hover:text-gray-300">Delivery</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="mt-20 px-6 py-12">
+        <h2 class="text-3xl font-extrabold text-center mb-8 text-black">Manage the inventory</h2>
+        <div class="overflow-x-auto">
+            <table class="min-w-full table-auto bg-white text-black border border-gray-300">
+                <thead>
+                    <tr>
+                        <th class="px-6 py-3 border-b text-left text-lg font-semibold">Ingredients</th>
+                        <th class="px-6 py-3 border-b text-left text-lg font-semibold">Quantity</th>
+                        <th class="px-6 py-3 border-b text-left text-lg font-semibold">Supplier</th>
+                        <th class="px-6 py-3 border-b text-left text-lg font-semibold">Origin</th>
+                        <th class="px-6 py-3 border-b text-left text-lg font-semibold">Restock</th>
+                        <th class="px-6 py-3 border-b text-left text-lg font-semibold">Updated Stock</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="px-6 py-3 border-b">Plain yogurt</td>
+                        <td class="px-6 py-3 border-b">50</td>
+                        <td class="px-6 py-3 border-b">Danone</td>
+                        <td class="px-6 py-3 border-b">France</td>
+                        <td class="px-6 py-3 border-b">
+                            <button onclick="updateStock('yogurt', 1)" class="flex flex-col items-center bg-blue-500 text-white px-4 py-2 rounded-md">
+                                <span>&#8593;</span> <!-- Up Arrow -->
+                            </button>
+                            <button onclick="updateStock('yogurt', -1)" class="flex flex-col items-center bg-blue-500 text-white px-4 py-2 rounded-md">
+                                <span>&#8595;</span> <!-- Down Arrow -->
+                            </button>
+                            
+                        </td>
+                        <td id="yogurt-stock" class="px-6 py-3 border-b">50</td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-3 border-b">Black chocolate (70%)</td>
+                        <td class="px-6 py-3 border-b">30</td>
+                        <td class="px-6 py-3 border-b">Barry Callebaut</td>
+                        <td class="px-6 py-3 border-b">Belgium</td>
+                        <td class="px-6 py-3 border-b">
+                            <button onclick="updateStock('chocolate', 1)" class="flex flex-col items-center bg-blue-500 text-white px-4 py-2 rounded-md">
+                                <span>&#8593;</span> <!-- Up Arrow -->
+                            </button>
+                            <button onclick="updateStock('chocolate', -1)" class="flex flex-col items-center bg-blue-500 text-white px-4 py-2 rounded-md">
+                                <span>&#8595;</span> <!-- Down Arrow -->
+                            </button>
+                            
+                        </td>
+                        <td id="chocolate-stock" class="px-6 py-3 border-b">30</td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-3 border-b">Sugar</td>
+                        <td class="px-6 py-3 border-b">30</td>
+                        <td class="px-6 py-3 border-b">Tereos</td>
+                        <td class="px-6 py-3 border-b">France</td>
+                        <td class="px-6 py-3 border-b">
+                            <button onclick="updateStock('sugar', 1)" class="flex flex-col items-center bg-blue-500 text-white px-4 py-2 rounded-md">
+                                <span>&#8593;</span> <!-- Up Arrow -->
+                            </button>
+                            <button onclick="updateStock('sugar', -1)" class="flex flex-col items-center bg-blue-500 text-white px-4 py-2 rounded-md">
+                                <span>&#8595;</span> <!-- Down Arrow -->
+                            </button>
+                        </td>
+                        <td id="sugar-stock" class="px-6 py-3 border-b">30</td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-3 border-b">Peach</td>
+                        <td class="px-6 py-3 border-b">30</td>
+                        <td class="px-6 py-3 border-b">Eurofresh</td>
+                        <td class="px-6 py-3 border-b">Spain</td>
+                        <td class="px-6 py-3 border-b">
+                            <button onclick="updateStock('peach', 1)" class="flex flex-col items-center bg-blue-500 text-white px-4 py-2 rounded-md">
+                                <span>&#8593;</span> <!-- Up Arrow -->
+                            </button>
+                            <button onclick="updateStock('peach', -1)" class="flex flex-col items-center bg-blue-500 text-white px-4 py-2 rounded-md">
+                                <span>&#8595;</span> <!-- Down Arrow -->
+                            </button>                            
+                        </td>
+                        <td id="peach-stock" class="px-6 py-3 border-b">30</td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-3 border-b">Apricot</td>
+                        <td class="px-6 py-3 border-b">30</td>
+                        <td class="px-6 py-3 border-b">Dole</td>
+                        <td class="px-6 py-3 border-b">Spain</td>
+                        <td class="px-6 py-3 border-b">
+                            <button onclick="updateStock('apricot', 1)" class="flex flex-col items-center bg-blue-500 text-white px-4 py-2 rounded-md">
+                                <span>&#8593;</span> <!-- Up Arrow -->
+                            </button>
+                            <button onclick="updateStock('apricot', -1)" class="flex flex-col items-center bg-blue-500 text-white px-4 py-2 rounded-md">
+                                <span>&#8595;</span> <!-- Down Arrow -->
+                            </button>                            
+                        </td>
+                        <td id="apricot-stock" class="px-6 py-3 border-b">30</td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-3 border-b">Blueberry</td>
+                        <td class="px-6 py-3 border-b">30</td>
+                        <td class="px-6 py-3 border-b">Fruticola</td>
+                        <td class="px-6 py-3 border-b">Portugal</td>
+                        <td class="px-6 py-3 border-b">
+                            <button onclick="updateStock('blueberry', 1)" class="flex flex-col items-center bg-blue-500 text-white px-4 py-2 rounded-md">
+                                <span>&#8593;</span> <!-- Up Arrow -->
+                            </button>
+                            <button onclick="updateStock('blueberry', -1)" class="flex flex-col items-center bg-blue-500 text-white px-4 py-2 rounded-md">
+                                <span>&#8595;</span> <!-- Down Arrow -->
+                            </button>                            
+                        </td>
+                        <td id="blueberry-stock" class="px-6 py-3 border-b">30</td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-3 border-b">Fresh mint</td>
+                        <td class="px-6 py-3 border-b">30</td>
+                        <td class="px-6 py-3 border-b">Herbes de Provence</td>
+                        <td class="px-6 py-3 border-b">France</td>
+                        <td class="px-6 py-3 border-b">
+                            <button onclick="updateStock('fresh_mint', 1)" class="flex flex-col items-center bg-blue-500 text-white px-4 py-2 rounded-md">
+                                <span>&#8593;</span> <!-- Up Arrow -->
+                            </button>
+                            <button onclick="updateStock('fresh_mint', -1)" class="flex flex-col items-center bg-blue-500 text-white px-4 py-2 rounded-md">
+                                <span>&#8595;</span> <!-- Down Arrow -->
+                            </button>                            
+                        </td>
+                        <td id="fresh_mint-stock" class="px-6 py-3 border-b">30</td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-3 border-b">Red berries</td>
+                        <td class="px-6 py-3 border-b">30</td>
+                        <td class="px-6 py-3 border-b">BerryWorld</td>
+                        <td class="px-6 py-3 border-b">United Kingdom</td>
+                        <td class="px-6 py-3 border-b">
+                            <button onclick="updateStock('red_berries', 1)" class="flex flex-col items-center bg-blue-500 text-white px-4 py-2 rounded-md">
+                                <span>&#8593;</span> <!-- Up Arrow -->
+                            </button>
+                            <button onclick="updateStock('red_berries', -1)" class="flex flex-col items-center bg-blue-500 text-white px-4 py-2 rounded-md">
+                                <span>&#8595;</span> <!-- Down Arrow -->
+                            </button>                            
+                        </td>
+                        <td id="red_berries-stock" class="px-6 py-3 border-b">30</td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-3 border-b">Milk chocolate</td>
+                        <td class="px-6 py-3 border-b">30</td>
+                        <td class="px-6 py-3 border-b">Lindt & Sprüngli</td>
+                        <td class="px-6 py-3 border-b">Switzerland</td>
+                        <td class="px-6 py-3 border-b">
+                            <button onclick="updateStock('milk_chocolate', 1)" class="flex flex-col items-center bg-blue-500 text-white px-4 py-2 rounded-md">
+                                <span>&#8593;</span> <!-- Up Arrow -->
+                            </button>
+                            <button onclick="updateStock('milk_chocolate', -1)" class="flex flex-col items-center bg-blue-500 text-white px-4 py-2 rounded-md">
+                                <span>&#8595;</span> <!-- Down Arrow -->
+                            </button>                            
+                        </td>
+                        <td id="milk_chocolate-stock" class="px-6 py-3 border-b">30</td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-3 border-b">Sweet pepper</td>
+                        <td class="px-6 py-3 border-b">30</td>
+                        <td class="px-6 py-3 border-b">Piment d'Espelette</td>
+                        <td class="px-6 py-3 border-b">France</td>
+                        <td class="px-6 py-3 border-b">
+                            <button onclick="updateStock('sweet_pepper', 1)" class="flex flex-col items-center bg-blue-500 text-white px-4 py-2 rounded-md">
+                                <span>&#8593;</span> <!-- Up Arrow -->
+                            </button>
+                            <button onclick="updateStock('sweet_pepper', -1)" class="flex flex-col items-center bg-blue-500 text-white px-4 py-2 rounded-md">
+                                <span>&#8595;</span> <!-- Down Arrow -->
+                            </button>                            
+                        </td>
+                        <td id="sweet_pepper-stock" class="px-6 py-3 border-b">30</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="text-center mt-6">
+                <button onclick="applyChanges()" class="bg-yellow-500 text-white py-2 px-6 rounded-lg hover:bg-green-600 transition duration-300">
+                    Apply Changes
+                </button>
+            </div>            
+        </div>
+    </section>
+
+    <script>
+        function updateStock(ingredient, change) {
+            const stockElement = document.getElementById(ingredient + '-stock');
+            let currentStock = parseInt(stockElement.innerText);
+
+            currentStock += change;
+            stockElement.innerText = currentStock;
+        }
+
+        function applyChanges() {
+            const ingredients = ['yogurt', 'chocolate', 'sugar', 'peach', 'apricot', 'blueberry', 'fresh_mint', 'red_berries', 'milk_chocolate', 'sweet_pepper'];
+            const stocks = {};
+
+            ingredients.forEach(ingredient => {
+                const stockElement = document.getElementById(ingredient + '-stock');
+                const currentStock = parseInt(stockElement.innerText);
+                stocks[ingredient] = currentStock;
+            });
+
+            localStorage.setItem('inventoryStocks', JSON.stringify(stocks));
+            alert('Changes applied and saved!');
+        }
+
+        window.onload = function() {
+            const savedStocks = localStorage.getItem('inventoryStocks');
+            
+            if (savedStocks) {
+                const stocks = JSON.parse(savedStocks);
+                
+                for (const ingredient in stocks) {
+                    const stockElement = document.getElementById(ingredient + '-stock');
+                    stockElement.innerText = stocks[ingredient];
+                }
+            }
+        };
+    </script>
+
+</body>
+</html>
+

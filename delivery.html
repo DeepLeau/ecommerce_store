@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delivery Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-900">
+
+    <nav class="bg-purple-600 p-4 text-white">
+        <div class="flex justify-between items-center">
+            <a class="text-2xl font-extrabold">Milky Whey</a>
+            <div>
+                <a href="landing_page.html" class="mr-4 hover:text-gray-300">Home</a>
+                <a href="inventory.html" class="hover:text-gray-300">Inventory</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto mt-8 p-4">
+        <h2 class="text-3xl font-extrabold mb-6">Manage Deliveries</h2>
+
+        <div class="text-right mb-4">
+            <button onclick="openModal()" class="bg-green-500 text-white py-2 px-6 rounded-md hover:bg-green-600 transition duration-300">
+                Add New Delivery
+            </button>
+        </div>
+
+        <table class="min-w-full table-auto bg-white rounded-lg shadow-md border-collapse">
+            <thead>
+                <tr>
+                    <th class="px-6 py-3 text-left text-lg font-semibold">Order ID</th>
+                    <th class="px-6 py-3 text-left text-lg font-semibold">Customer</th>
+                    <th class="px-6 py-3 text-left text-lg font-semibold">Address</th>
+                    <th class="px-6 py-3 text-left text-lg font-semibold">Status</th>
+                    <th class="px-6 py-3 text-left text-lg font-semibold">Actions</th>
+                </tr>
+            </thead>
+            <tbody id="deliveryTable">
+            </tbody>
+        </table>
+    </div>
+
+    <div id="deliveryModal" class="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center hidden">
+        <div class="bg-white p-6 rounded-lg shadow-md w-1/3">
+            <h3 class="text-2xl font-extrabold mb-4">Add New Delivery</h3>
+            <form id="addDeliveryForm">
+                <div class="mb-4">
+                    <label for="orderId" class="block text-lg font-semibold mb-2">Order ID</label>
+                    <input type="text" id="orderId" class="w-full p-3 border border-gray-300 rounded-md" required>
+                </div>
+                <div class="mb-4">
+                    <label for="customer" class="block text-lg font-semibold mb-2">Customer Name</label>
+                    <input type="text" id="customer" class="w-full p-3 border border-gray-300 rounded-md" required>
+                </div>
+                <div class="mb-4">
+                    <label for="address" class="block text-lg font-semibold mb-2">Delivery Address</label>
+                    <input type="text" id="address" class="w-full p-3 border border-gray-300 rounded-md" required>
+                </div>
+                <div class="mb-4">
+                    <label for="status" class="block text-lg font-semibold mb-2">Status</label>
+                    <select id="status" class="w-full p-3 border border-gray-300 rounded-md">
+                        <option value="Pending">Pending</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Delivered">Delivered</option>
+                    </select>
+                </div>
+                <div class="flex justify-between">
+                    <button type="button" onclick="closeModal()" class="bg-gray-500 text-white py-2 px-4 rounded-md hover:bg-gray-600">Cancel</button>
+                    <button type="submit" class="bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const deliveries = [];
+    
+        // Fonction pour charger les données depuis le localStorage et les afficher
+        function loadDeliveriesFromLocalStorage() {
+            const orders = JSON.parse(localStorage.getItem('orders')) || []; // Récupérer les commandes depuis le localStorage
+            orders.forEach(order => {
+                deliveries.push({
+                    orderId: order.orderId,
+                    customer: `${order.firstName} ${order.lastName}`, // Combiner le prénom et le nom pour le client
+                    address: order.address,
+                    status: 'Pending' // Par défaut, l'état est "Pending"
+                });
+            });
+            renderDeliveryTable(); // Afficher les commandes dans le tableau
+        }
+    
+        // Fonction pour ouvrir le modal
+        function openModal() {
+            document.getElementById('deliveryModal').classList.remove('hidden');
+        }
+    
+        // Fonction pour fermer le modal
+        function closeModal() {
+            document.getElementById('deliveryModal').classList.add('hidden');
+        }
+    
+        // Ajouter une nouvelle livraison
+        document.getElementById('addDeliveryForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+    
+            const orderId = document.getElementById('orderId').value;
+            const customer = document.getElementById('customer').value;
+            const address = document.getElementById('address').value;
+            const status = document.getElementById('status').value;
+    
+            deliveries.push({ orderId, customer, address, status });
+    
+            renderDeliveryTable(); // Mettre à jour le tableau avec la nouvelle livraison
+    
+            // Sauvegarder la nouvelle commande dans le localStorage
+            const newOrder = {
+                orderId: parseInt(orderId),
+                firstName: customer.split(' ')[0], // Assumer que le prénom est la première partie du nom complet
+                lastName: customer.split(' ')[1], // Assumer que le nom est la deuxième partie
+                address: address
+            };
+            let orders = JSON.parse(localStorage.getItem('orders')) || [];
+            orders.push(newOrder);
+            localStorage.setItem('orders', JSON.stringify(orders));
+    
+            closeModal(); // Fermer le modal
+        });
+    
+        // Fonction pour rendre le tableau des livraisons
+        function renderDeliveryTable() {
+            const tableBody = document.getElementById('deliveryTable');
+            tableBody.innerHTML = '';
+    
+            deliveries.forEach(delivery => {
+                const row = document.createElement('tr');
+                row.classList.add('border-b');
+                
+                row.innerHTML = `
+                    <td class="px-6 py-3">${delivery.orderId}</td>
+                    <td class="px-6 py-3">${delivery.customer}</td>
+                    <td class="px-6 py-3">${delivery.address}</td>
+                    <td class="px-6 py-3">
+                        <button onclick="toggleStatusMenu('${delivery.orderId}')" id="statusButton-${delivery.orderId}" class="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600">
+                            ${delivery.status}
+                        </button>
+                        <div id="statusMenu-${delivery.orderId}" class="hidden mt-2 absolute bg-white border rounded-lg shadow-lg">
+                            <button onclick="changeStatus('${delivery.orderId}', 'Pending')" class="block px-4 py-2 text-black hover:bg-gray-200">Pending</button>
+                            <button onclick="changeStatus('${delivery.orderId}', 'In Progress')" class="block px-4 py-2 text-black hover:bg-gray-200">In Progress</button>
+                            <button onclick="changeStatus('${delivery.orderId}', 'Delivered')" class="block px-4 py-2 text-black hover:bg-gray-200">Delivered</button>
+                        </div>
+                    </td>
+                    <td class="px-6 py-3">
+                        <button onclick="markAsDelivered('${delivery.orderId}')" class="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600">Mark as Delivered</button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+    
+        function toggleStatusMenu(orderId) {
+            const menu = document.getElementById(`statusMenu-${orderId}`);
+            menu.classList.toggle('hidden');
+        }
+    
+        function changeStatus(orderId, newStatus) {
+            const delivery = deliveries.find(d => d.orderId === orderId);
+            if (delivery) {
+                delivery.status = newStatus;
+                renderDeliveryTable(); 
+    
+                const statusButton = document.getElementById(`statusButton-${orderId}`);
+                statusButton.textContent = newStatus;
+    
+                if (newStatus === 'In Progress') {
+                    statusButton.classList.remove('bg-blue-500', 'hover:bg-blue-600');
+                    statusButton.classList.add('bg-red-500', 'hover:bg-red-600');
+                } else if (newStatus === 'Delivered') {
+                    statusButton.classList.remove('bg-blue-500', 'hover:bg-blue-600');
+                    statusButton.classList.add('bg-green-500', 'hover:bg-green-600');
+                } else {
+                    statusButton.classList.remove('bg-red-500', 'hover:bg-red-600', 'bg-green-500', 'hover:bg-green-600');
+                    statusButton.classList.add('bg-blue-500', 'hover:bg-blue-600');
+                }
+    
+                const menu = document.getElementById(`statusMenu-${orderId}`);
+                menu.classList.add('hidden');
+            }
+        }
+    
+        function markAsDelivered(orderId) {
+            const delivery = deliveries.find(d => d.orderId === orderId);
+            if (delivery) {
+                delivery.status = 'Delivered';
+                renderDeliveryTable(); 
+            }
+        }
+    
+        window.onload = loadDeliveriesFromLocalStorage;
+    </script>               
+</body>
+</html>

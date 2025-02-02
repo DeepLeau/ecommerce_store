@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Milky Way Exploration</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .parallax {
+            background-image: url('/galactic.png');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+        .navbar-hidden {
+            transform: translateY(-100%);
+            transition: transform 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-transparent text-white">
+
+    <nav class="bg-transparent fixed w-full top-0 left-0 z-20 px-6 py-4">
+        <div class="flex justify-between items-center">
+            <a href="#" class="text-2xl font-extrabold text-white">
+                <img src="logo.png" alt="Logo" class="h-20">
+            </a>
+            <div class="space-x-6">
+                <a href="landing_page.html" class="text-white hover:text-gray-400 transition duration-300">Home</a>
+                <a href="inventory.html" class="text-white hover:text-gray-400 transition duration-300">Inventory</a>
+                <a href="delivery.html" class="text-white hover:text-gray-400 transition duration-300">Delivery</a>
+                <a href="#contact" class="text-white hover:text-gray-400 transition duration-300">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="relative text-white h-screen flex items-center justify-center mb-12">
+        <video class="absolute top-0 left-0 w-full h-full object-cover z-[-1]" autoplay loop muted>
+            <source src="background.mp4" type="video/mp4">
+            Votre navigateur ne prend pas en charge la vidéo.
+        </video>
+    </section>
+
+    <section class="bg-white text-black py-12 flex items-center justify-center mx-6">
+        <div class="max-w-6xl mx-auto px-6 flex items-center space-x-8">
+            <div class="flex-shrink-0 w-1/2">
+                <img src="earth.png" alt="Milky Way" class="w-full h-auto rounded-lg">
+            </div>
+
+            <div class="w-1/2 text-center">
+                <h2 class="text-3xl font-extrabold mb-4">Earth Yogurt</h2>
+                <p class="text-lg mb-6">Embark on a journey through the cosmos and explore the wonders of our galaxy like never before. From breathtaking nebulae to distant stars, the Milky Way offers endless mysteries to uncover.</p>
+
+                <p class="text-2xl font-semibold mb-6">$29.99</p>
+
+                <button onclick="payNow('earth')" class="bg-purple-500 text-white py-3 px-6 rounded-lg hover:bg-blue-600 transition duration-300">
+                    Pay now
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-white text-black py-12 flex items-center justify-center rounded-2xl shadow-xl mx-6">
+        <div class="max-w-7xl mx-auto px-6 flex items-center space-x-8 flex-row-reverse">
+            <div class="flex-shrink-0 w-1/2">
+                <img src="mercure.jpeg" alt="Milky Way" class="w-full h-auto rounded-lg shadow-lg">
+            </div>
+
+            <div class="w-1/2 text-center">
+                <h2 class="text-3xl font-extrabold mb-4">Mercury Yogurt</h2>
+                <p class="text-lg mb-6">Embark on a journey through the cosmos and explore the wonders of our galaxy like never before. From breathtaking nebulae to distant stars, the Milky Way offers endless mysteries to uncover.</p>
+
+                <p class="text-2xl font-semibold mb-6">$29.99</p>
+
+                <button onclick="payNow('mercure')" class="bg-purple-500 text-white py-3 px-6 rounded-lg hover:bg-blue-600 transition duration-300">
+                    Pay now
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-white text-black py-12 flex items-center justify-center mx-6">
+        <div class="max-w-6xl mx-auto px-6 flex items-center space-x-8">
+            <div class="flex-shrink-0 w-1/2">
+                <img src="jupiter.jpeg" alt="Milky Way" class="w-full h-auto rounded-lg">
+            </div>
+
+            <div class="w-1/2 text-center">
+                <h2 class="text-3xl font-extrabold mb-4">Venus Yogurt</h2>
+                <p class="text-lg mb-6">Embark on a journey through the cosmos and explore the wonders of our galaxy like never before. From breathtaking nebulae to distant stars, the Milky Way offers endless mysteries to uncover.</p>
+
+                <p class="text-2xl font-semibold mb-6">$29.99</p>
+
+                <button onclick="payNow('venus')" class="bg-purple-500 text-white py-3 px-6 rounded-lg hover:bg-blue-600 transition duration-300">
+                    Pay now
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-white text-black py-12 flex items-center justify-center rounded-2xl shadow-xl mx-6">
+        <div class="max-w-7xl mx-auto px-6 flex items-center space-x-8 flex-row-reverse">
+            <div class="flex-shrink-0 w-1/2">
+                <img src="mars.jpeg" alt="Milky Way" class="w-full h-auto rounded-lg shadow-lg">
+            </div>
+
+            <div class="w-1/2 text-center">
+                <h2 class="text-3xl font-extrabold mb-4">Mars Yogurt</h2>
+                <p class="text-lg mb-6">Embark on a journey through the cosmos and explore the wonders of our galaxy like never before. From breathtaking nebulae to distant stars, the Milky Way offers endless mysteries to uncover.</p>
+
+                <p class="text-2xl font-semibold mb-6">$29.99</p>
+
+                <button onclick="payNow('mars')" class="bg-purple-500 text-white py-3 px-6 rounded-lg hover:bg-blue-600 transition duration-300">
+                    Pay now
+                </button>
+            </div>
+        </div>
+    </section>
+    <script>
+        function payNow(product) {
+            let ingredientsToUpdate = {};
+            let productImageUrl = "";
+
+            switch (product) {
+                case 'earth':
+                    ingredientsToUpdate = { 'yogurt': 1, 'blueberry' : 1, 'fresh_mint' : 1, 'sugar' : 1 }; 
+                    productImageUrl = "earth.png";
+                    break;
+                case 'mercure':
+                    ingredientsToUpdate = { 'yogurt': 1, 'chocolate' : 1, 'sugar' : 1 };
+                    productImageUrl = "mercure.jpeg";
+                    break;
+                case 'venus':
+                    ingredientsToUpdate = { 'yogurt': 1, 'peach' : 1, 'apricot' : 1, 'sugar' : 1 };
+                    productImageUrl = "jupyter.jpeg";
+                    break;
+                case 'mars':
+                    ingredientsToUpdate = { 'yogurt': 1, 'red_berries' : 1, 'milk_chocolate' : 1, 'sweet_pepper' : 1 };
+                    productImageUrl = "mars.jpeg";
+                    break;
+                default:
+                    console.log('Invalid Product');
+                    return;
+            }
+
+            const savedStocks = localStorage.getItem('inventoryStocks');
+            const stocks = savedStocks ? JSON.parse(savedStocks) : {};
+
+            for (const ingredient in ingredientsToUpdate) {
+                if (stocks[ingredient] && stocks[ingredient] > 0) {
+                    stocks[ingredient] -= ingredientsToUpdate[ingredient];
+                    if (stocks[ingredient] < 0) {
+                        stocks[ingredient] = 0; 
+                    }
+                } else {
+                    alert(`Not enough ${ingredient} stock to complete the payment.`);
+                    return;
+                }
+            }
+
+            localStorage.setItem('inventoryStocks', JSON.stringify(stocks));
+            localStorage.setItem('product', product)
+            localStorage.setItem('productImage', productImageUrl)
+            window.location.href = 'purchase.html'
+        }
+    </script>
+</body>
+</html>
