@@ -28,7 +28,7 @@
     <nav class="bg-transparent fixed w-full top-0 left-0 z-20 px-6 py-4">
         <div class="flex justify-between items-center">
             <a href="#" class="text-2xl font-extrabold text-white">
-                <img src="logo.png" alt="Logo" class="h-20">
+                <img src="src/logo.png" alt="Logo" class="h-20">
             </a>
             <div class="space-x-6">
                 <a href="landing_page.html" class="text-white hover:text-gray-400 transition duration-300">Home</a>
@@ -41,7 +41,7 @@
 
     <section class="relative text-white h-screen flex items-center justify-center mb-12">
         <video class="absolute top-0 left-0 w-full h-full object-cover z-[-1]" autoplay loop muted>
-            <source src="background.mp4" type="video/mp4">
+            <source src="src/background.mp4" type="video/mp4">
             Votre navigateur ne prend pas en charge la vidéo.
         </video>
     </section>
@@ -49,7 +49,7 @@
     <section class="bg-white text-black py-12 flex items-center justify-center mx-6">
         <div class="max-w-6xl mx-auto px-6 flex items-center space-x-8">
             <div class="flex-shrink-0 w-1/2">
-                <img src="earth.png" alt="Milky Way" class="w-full h-auto rounded-lg">
+                <img src="src/earth.png" alt="Milky Way" class="w-full h-auto rounded-lg">
             </div>
 
             <div class="w-1/2 text-center">
@@ -87,7 +87,7 @@
     <section class="bg-white text-black py-12 flex items-center justify-center mx-6">
         <div class="max-w-6xl mx-auto px-6 flex items-center space-x-8">
             <div class="flex-shrink-0 w-1/2">
-                <img src="jupiter.jpeg" alt="Milky Way" class="w-full h-auto rounded-lg">
+                <img src="src/jupiter.jpeg" alt="Milky Way" class="w-full h-auto rounded-lg">
             </div>
 
             <div class="w-1/2 text-center">
@@ -106,7 +106,7 @@
     <section class="bg-white text-black py-12 flex items-center justify-center rounded-2xl shadow-xl mx-6">
         <div class="max-w-7xl mx-auto px-6 flex items-center space-x-8 flex-row-reverse">
             <div class="flex-shrink-0 w-1/2">
-                <img src="mars.jpeg" alt="Milky Way" class="w-full h-auto rounded-lg shadow-lg">
+                <img src="src/mars.jpeg" alt="Milky Way" class="w-full h-auto rounded-lg shadow-lg">
             </div>
 
             <div class="w-1/2 text-center">
@@ -129,19 +129,19 @@
             switch (product) {
                 case 'earth':
                     ingredientsToUpdate = { 'yogurt': 1, 'blueberry' : 1, 'fresh_mint' : 1, 'sugar' : 1 }; 
-                    productImageUrl = "earth.png";
+                    productImageUrl = "src/earth.png";
                     break;
                 case 'mercure':
                     ingredientsToUpdate = { 'yogurt': 1, 'chocolate' : 1, 'sugar' : 1 };
-                    productImageUrl = "mercure.jpeg";
+                    productImageUrl = "src/mercure.jpeg";
                     break;
                 case 'venus':
                     ingredientsToUpdate = { 'yogurt': 1, 'peach' : 1, 'apricot' : 1, 'sugar' : 1 };
-                    productImageUrl = "jupyter.jpeg";
+                    productImageUrl = "src/jupiter.jpeg";
                     break;
                 case 'mars':
                     ingredientsToUpdate = { 'yogurt': 1, 'red_berries' : 1, 'milk_chocolate' : 1, 'sweet_pepper' : 1 };
-                    productImageUrl = "mars.jpeg";
+                    productImageUrl = "src/mars.jpeg";
                     break;
                 default:
                     console.log('Invalid Product');
